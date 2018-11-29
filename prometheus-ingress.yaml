@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-promethus-ingress
+  annotations:
+    kubernetes.io/ingress.class: "lot"
+spec:
+  tls:
+    - secretName: traefik-ssl
+  rules:
+  - host: k8s-web.kingon.com  # 替换成你的域名
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: prometheus
+          servicePort: 9090
